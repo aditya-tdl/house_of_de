@@ -39,12 +39,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 7.2.0
- * Query Engine version: 0c8ef2ce45c83248ab3df073180d5eda9e8be7a3
+ * Prisma Client JS version: 7.3.0
+ * Query Engine version: 9d6ad21cbbceab97458517b147a6a09ff43aa735
  */
 Prisma.prismaVersion = {
-  client: "7.2.0",
-  engine: "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3"
+  client: "7.3.0",
+  engine: "9d6ad21cbbceab97458517b147a6a09ff43aa735"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -188,8 +188,8 @@ exports.Prisma.ModelName = {
  */
 const config = {
   "previewFeatures": [],
-  "clientVersion": "7.2.0",
-  "engineVersion": "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
+  "clientVersion": "7.3.0",
+  "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "postgresql",
   "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  schemas  = [\"public\", \"uam\"]\n}\n\nmodel user {\n  id         Int       @id @default(autoincrement())\n  name       String\n  email      String    @unique\n  gender     String\n  mobile     String    @unique\n  password   String\n  role       role      @default(USER)\n  created_at DateTime  @default(now())\n  bookings   booking[]\n\n  @@index([email])\n  @@index([mobile])\n  @@schema(\"uam\")\n}\n\nenum role {\n  USER\n  ADMIN\n\n  @@schema(\"public\")\n}\n\nenum booking_status {\n  PENDING\n  CONFIRMED\n  CANCELLED\n  COMPLETED\n\n  @@schema(\"uam\")\n}\n\nmodel booking {\n  id              Int            @id @default(autoincrement())\n  userId          Int?\n  user            user?          @relation(fields: [userId], references: [id])\n  slotId          Int?\n  slot            slot?          @relation(fields: [slotId], references: [id])\n  fullName        String\n  email           String\n  phone           String\n  shirtType       String\n  price           Float\n  specialRequests String?\n  appointmentType String?\n  status          booking_status @default(PENDING)\n  createdAt       DateTime       @default(now())\n  updatedAt       DateTime       @updatedAt\n\n  @@index([userId])\n  @@index([email])\n  @@index([slotId])\n  @@schema(\"uam\")\n}\n\nmodel slot {\n  id          Int       @id @default(autoincrement())\n  date        DateTime\n  capacity    Int\n  time        String\n  bookedCount Int       @default(0)\n  isBooked    Boolean   @default(false)\n  bookings    booking[]\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n\n  @@schema(\"uam\")\n}\n\nenum journal_status {\n  DRAFT\n  PUBLISHED\n\n  @@schema(\"uam\")\n}\n\nmodel blog {\n  id          Int            @id @default(autoincrement())\n  title       String\n  slug        String         @unique\n  category    String\n  readTime    String\n  excerpt     String\n  content     String         @db.Text\n  image       String?\n  status      journal_status @default(DRAFT)\n  publishedAt DateTime?\n  createdAt   DateTime       @default(now())\n  updatedAt   DateTime       @updatedAt\n\n  @@index([slug])\n  @@schema(\"uam\")\n}\n"
 }
@@ -197,14 +197,15 @@ const config = {
 config.runtimeDataModel = JSON.parse("{\"models\":{\"user\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"gender\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"mobile\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"role\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"bookings\",\"kind\":\"object\",\"type\":\"booking\",\"relationName\":\"bookingTouser\"}],\"dbName\":null},\"booking\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"user\",\"relationName\":\"bookingTouser\"},{\"name\":\"slotId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"slot\",\"kind\":\"object\",\"type\":\"slot\",\"relationName\":\"bookingToslot\"},{\"name\":\"fullName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"shirtType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"specialRequests\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"appointmentType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"booking_status\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"slot\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"capacity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"time\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bookedCount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"isBooked\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"bookings\",\"kind\":\"object\",\"type\":\"booking\",\"relationName\":\"bookingToslot\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"blog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"category\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"readTime\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"excerpt\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"journal_status\"},{\"name\":\"publishedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.compilerWasm = {
-      getRuntime: async () => require('./query_compiler_bg.js'),
+      getRuntime: async () => require('./query_compiler_fast_bg.js'),
       getQueryCompilerWasmModule: async () => {
         const { Buffer } = require('node:buffer')
-        const { wasm } = require('./query_compiler_bg.wasm-base64.js')
+        const { wasm } = require('./query_compiler_fast_bg.wasm-base64.js')
         const queryCompilerWasmFileBytes = Buffer.from(wasm, 'base64')
 
         return new WebAssembly.Module(queryCompilerWasmFileBytes)
-      }
+      },
+      importName: './query_compiler_fast_bg.js',
     }
 
 const PrismaClient = getPrismaClient(config)

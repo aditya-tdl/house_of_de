@@ -1,11 +1,11 @@
 {
-  "name": "salaried-ai-backend",
+  "name": "house-of-de-backend",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon src/server.js",
     "start": "cross-env NODE_ENV=production node src/server.js",
-    "build": "rimraf dist && xcopy src dist /E /I /Y"
+    "build": "prisma generate"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.2.0",
