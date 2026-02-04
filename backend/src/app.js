@@ -8,9 +8,11 @@ import morgan from "morgan";
 const app = express();
 
 const allowedOrigins = [
+  "https://house-of-de-red.vercel.app",
   "http://localhost:8080",
   "https://jncvd963-8080.inc1.devtunnels.ms",
-  "https://3rx6504d-8080.inc1.devtunnels.ms", "https://jncvd963-8080.inc1.devtunnels.ms",
+  "https://3rx6504d-8080.inc1.devtunnels.ms",
+  "https://jncvd963-8080.inc1.devtunnels.ms",
 ];
 // CORS configuration for cross-origin requests and credentials
 const corsOptions = {
