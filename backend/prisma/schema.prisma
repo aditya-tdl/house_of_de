@@ -1,0 +1,106 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = [ "public", "uam"]
+}
+
+model user {
+  id            Int                @id @default(autoincrement())
+  name          String
+  email         String             @unique
+  gender        String
+  mobile        String             @unique
+  password      String
+  role          role               @default(USER)
+  created_at    DateTime           @default(now())
+  bookings      booking[]
+
+
+  @@index([email])
+  @@index([mobile])
+  @@schema("uam")
+}
+
+enum role {
+  USER
+  ADMIN
+
+  @@schema("public")
+}
+
+enum booking_status {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+
+  @@schema("uam")
+}
+
+model booking {
+  id              Int            @id @default(autoincrement())
+  userId          Int?
+  user            user?          @relation(fields: [userId], references: [id])
+  slotId          Int?
+  slot            slot?          @relation(fields: [slotId], references: [id])
+  fullName        String
+  email           String
+  phone           String
+  shirtType       String
+  price           Float
+  specialRequests String?
+  appointmentType String?
+  status          booking_status @default(PENDING)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([userId])
+  @@index([email])
+  @@index([slotId])
+  @@schema("uam")
+}
+
+model slot {
+  id        Int       @id @default(autoincrement())
+  date      DateTime
+  capacity    Int
+  time      String
+  bookedCount Int      @default(0)
+  isBooked  Boolean   @default(false)
+  bookings  booking[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@schema("uam")
+}
+
+enum journal_status {
+  DRAFT
+  PUBLISHED
+
+  @@schema("uam")
+}
+
+model blog {
+  id          Int            @id @default(autoincrement())
+  title       String
+  slug        String         @unique
+  category    String
+  readTime    String
+  excerpt     String
+  content     String         @db.Text
+  image       String?
+  status      journal_status @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@index([slug])
+  @@schema("uam")
+}
+
+

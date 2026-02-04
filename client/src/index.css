@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Luxury monochromatic palette */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 8%;
+
+    --card: 40 20% 98%;
+    --card-foreground: 0 0% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
+
+    /* Deep charcoal primary */
+    --primary: 0 0% 12%;
+    --primary-foreground: 0 0% 98%;
+
+    /* Warm cream secondary */
+    --secondary: 40 30% 96%;
+    --secondary-foreground: 0 0% 12%;
+
+    /* Soft warm gray muted */
+    --muted: 40 10% 94%;
+    --muted-foreground: 0 0% 45%;
+
+    /* Warm accent */
+    --accent: 35 25% 92%;
+    --accent-foreground: 0 0% 12%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 40 15% 90%;
+    --input: 40 15% 90%;
+    --ring: 0 0% 12%;
+
+    --radius: 0rem;
+
+    /* Luxury gold accent */
+    --gold: 43 74% 49%;
+    --gold-muted: 43 40% 75%;
+
+    /* Editorial spacing */
+    --section-padding: 6rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+
+    --gold: 43 74% 49%;
+    --gold-muted: 43 40% 30%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .editorial-heading {
+    @apply text-5xl md:text-7xl lg:text-8xl font-normal tracking-tight;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .section-heading {
+    @apply text-3xl md:text-4xl lg:text-5xl font-normal;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .luxury-text {
+    @apply text-sm md:text-base font-light tracking-wide leading-relaxed;
+    letter-spacing: 0.05em;
+  }
+
+  .luxury-label {
+    @apply text-xs uppercase tracking-[0.2em] font-medium text-muted-foreground;
+  }
+
+  .luxury-link {
+    @apply relative inline-block text-foreground after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-foreground after:transition-all after:duration-500 hover:after:w-full;
+  }
+
+  .luxury-button {
+    @apply px-8 py-4 bg-primary text-primary-foreground text-xs uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-foreground/90;
+  }
+
+  .luxury-button-outline {
+    @apply px-8 py-4 border border-foreground text-foreground text-xs uppercase tracking-[0.2em] font-medium transition-all duration-500 hover:bg-foreground hover:text-background;
+  }
+
+  .luxury-divider {
+    @apply w-16 h-[1px] bg-foreground/20;
+  }
+}
+
+@layer utilities {
+  .fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .image-reveal {
+    animation: imageReveal 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes imageReveal {
+    from {
+      clip-path: inset(100% 0 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+}
