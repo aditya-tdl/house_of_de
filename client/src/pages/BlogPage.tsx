@@ -49,7 +49,7 @@ const BlogPage = () => {
       setIsLoading(false);
     }
   };
-  console.log(blogs);
+  console.log("blogs", blogs);
   return (
     <div className="min-h-screen">
       <Header />
